@@ -1,0 +1,48 @@
+$green: hsl(120, 60%, 20%)
+$red: hsl(0, 60%, 20%)
+$yellow: hsl(60, 60%, 20%)
+$blue: hsl(240, 60%, 20%)
+
+body
+  margin: 0
+  background-color: #222
+
+.simon
+  margin: 0 auto
+  width: 512px
+  height: 512px
+  background-color: #444
+
+.controls
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translateX(-50%)
+
+.buttons
+  position: relative
+  display: flex
+  flex-wrap: wrap
+
+.button
+  border: 0
+  margin: 64px
+  width: 128px
+  height: 128px
+
+.green
+  background-color: $green
+.red
+  background-color: $red
+.yellow
+  background-color: $yellow
+.blue
+  background-color: $blue
+.green-light
+  background-color: lighten($green, 50%)
+.red-light
+  background-color: lighten($red, 50%)
+.yellow-light
+  background-color: lighten($yellow, 50%)
+.blue-light
+  background-color: lighten($blue, 50%)
