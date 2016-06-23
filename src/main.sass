@@ -31,19 +31,26 @@ body
   width: 128px
   height: 128px
 
-.green
-  background-color: $green
-.red
-  background-color: $red
-.yellow
-  background-color: $yellow
-.blue
-  background-color: $blue
-.green-light
-  background-color: lighten($green, 50%)
-.red-light
-  background-color: lighten($red, 50%)
-.yellow-light
-  background-color: lighten($yellow, 50%)
-.blue-light
-  background-color: lighten($blue, 50%)
+path.green
+  fill: $green
+path.red
+  fill: $red
+path.yellow
+  fill: $yellow
+path.blue
+  fill: $blue
+path.green-light
+  fill: lighten($green, 50%)
+path.red-light
+  fill: lighten($red, 50%)
+path.yellow-light
+  fill: lighten($yellow, 50%)
+path.blue-light
+  fill: lighten($blue, 50%)
+
+svg.red
+  transform: rotate(90deg)
+svg.yellow
+  transform: rotate(270deg)
+svg.blue
+  transform: rotate(180deg)
