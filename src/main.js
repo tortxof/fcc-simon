@@ -5,12 +5,11 @@ var COLORS = [
   'blue'
 ];
 
-$('.button').on('mousedown', function() {
-  $(this).children('path').addClass($(this).data('color') + '-light');
-});
-
-$('.button').on('mouseup', function() {
-  $(this).children('path').removeClass($(this).data('color') + '-light');
+$('.button').on('click', function() {
+  lightOn($(this).data('color'));
+  setTimeout(function(color) {
+    lightOff(color);
+  }, 300, $(this).data('color'));
 });
 
 function lightOn(color) {
