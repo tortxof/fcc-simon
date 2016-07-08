@@ -33,8 +33,8 @@ function flashAll() {
 function play_seq(seq) {
   console.log('play_seq');
   for (var i=0; i<seq.length; i++) {
-    setTimeout(lightOn, (i * 1000) + 500 , COLORS[seq[i]]);
-    setTimeout(lightOff, (i * 1000) + 1000, COLORS[seq[i]]);
+    setTimeout(lightOn, (i * 800) + 400 , COLORS[seq[i]]);
+    setTimeout(lightOff, (i * 800) + 800, COLORS[seq[i]]);
   }
 }
 
