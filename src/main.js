@@ -78,12 +78,6 @@ var sequence = [];
 var player_sequence = [];
 var game_running = false;
 
-$('#reset').click(function() {
-  sequence = [];
-  player_sequence = [];
-  game_running = false;
-});
-
 $('#start').click(function() {
   console.log('start');
   sequence = [];
