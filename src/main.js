@@ -20,6 +20,16 @@ function lightOff(color) {
   $('path.' + color).removeClass(color + '-light');
 }
 
+function flashAll() {
+  console.log('flashAll');
+  for (var i=0; i<3; i++) {
+    for (var color=0; color<COLORS.length; color++){
+      setTimeout(lightOn, (i * 400) + 200, COLORS[color]);
+      setTimeout(lightOff, (i * 400) + 400, COLORS[color]);
+    }
+  }
+}
+
 function play_seq(seq) {
   console.log('play_seq');
   for (var i=0; i<seq.length; i++) {
