@@ -47,13 +47,26 @@ function gen_play_sequence() {
 
 function check_sequence() {
   console.log('check_sequence');
+  var sequence_good;
   if (player_sequence.length >= sequence.length) {
-    var sequence_good = sequence.reduce(function(prev, curr, i) {
+    sequence_good = sequence.reduce(function(prev, curr, i) {
       return prev && (curr === player_sequence[i]);
     }, true);
     if (sequence_good) {
       gen_play_sequence();
     } else {
+      flashAll();
+      sequence = [];
+      player_sequence = [];
+      game_running = false;
+    }
+  } else {
+    console.log('check_sequence incomplete');
+    sequence_good = sequence.slice(0, player_sequence.length).reduce(function(prev, curr, i) {
+      return prev && (curr === player_sequence[i]);
+    }, true);
+    if (!sequence_good) {
+      flashAll();
       sequence = [];
       player_sequence = [];
       game_running = false;
