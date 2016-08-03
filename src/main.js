@@ -5,6 +5,19 @@ var COLORS = [
   'blue'
 ];
 
+function GameState() {
+  // Is the game switched on?
+  this.on = false;
+  // Is strict mode enabled?
+  this.strict = false;
+  // Are we waiting for player input?
+  this.waiting_for_input = false;
+  // Computer generated sequence. One element is added each turn.
+  this.challenge_seq = [];
+  // Player input. This is blanked each turn before player starts entering the sequence.
+  this.input_seq = [];
+}
+
 $('.button').on('click', function() {
   lightOn($(this).data('color'));
   setTimeout(function(color) {
