@@ -5,40 +5,69 @@ $blue: hsl(240, 50%, 20%)
 
 body
   margin: 0
-  background-color: #222
+  color: #333
+  background-color: #444
 
 .simon
+  position: relative
   margin: 64px auto
   width: 512px
   height: 512px
   border-radius: 50%
-  background-color: #444
+  background-color: #666
   box-shadow: 3px 8px 15px rgba(black, .6), inset 2px 4px 6px rgba(white, .2)
 
 .controls
   position: absolute
+  width: 192px
+  height: 192px
   top: 50%
   left: 50%
-  transform: translateX(-50%)
+  transform: translate(-50%, -50%)
   z-index: 1
+  border-radius: 50%
+  background-color: #ddd
   button
     width: 32px
     height: 32px
     border-radius: 50%
     border: 5px solid #888
 
+.game-label
+  position: absolute
+  top: 32px
+  left: 96px
+  font-size: 32px
+  font-weight: bold
+  transform: translateX(-50%)
+
 #count
+  position: absolute
+  top: 88px
+  left: 32px
   padding: 8px
+  border-radius: 8px
+  font-family: monospace
+  font-size: 16px
   background-color: #422
   color: #f22
 
 #start
+  position: absolute
+  top: 96px
+  left: 72px
   background-color: red
 
 #strict
+  position: absolute
+  top: 96px
+  left: 108px
   background-color: yellow
 
 #power
+  position: absolute
+  top: 136px
+  left: 72px
   background-color: cornflowerblue
 
 .buttons
