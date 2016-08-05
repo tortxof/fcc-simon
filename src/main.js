@@ -18,12 +18,7 @@ function GameState() {
   this.input_seq = [];
 }
 
-$('.button').on('click', function() {
-  lightOn($(this).data('color'));
-  setTimeout(function(color) {
-    lightOff(color);
-  }, 300, $(this).data('color'));
-});
+var game_state = new GameState();
 
 function lightOn(color) {
   $('path.' + color).addClass(color + '-light');
@@ -51,57 +46,31 @@ function play_seq(seq) {
   }
 }
 
-function gen_play_sequence() {
-  console.log('gen_play_sequence');
-  sequence.push(Math.floor(Math.random() * 4));
-  play_seq(sequence);
-  player_sequence = [];
+function genChallengeSeq() {
+  console.log('genChallengeSeq');
+  game_state.challenge_seq.push(Math.floor(Math.random() * 4));
 }
 
-function check_sequence() {
-  console.log('check_sequence');
-  var sequence_good;
-  if (player_sequence.length >= sequence.length) {
-    sequence_good = sequence.reduce(function(prev, curr, i) {
-      return prev && (curr === player_sequence[i]);
+function check_sequence(input_seq, challenge_seq) {
+  if (input_seq.length >= challenge_seq.length) {
+    console.log('check_sequence complete');
+    return challenge_seq.reduce(function(prev, curr, i) {
+      return prev && (curr === input_seq[i]);
     }, true);
-    if (sequence_good) {
-      gen_play_sequence();
-    } else {
-      flashAll();
-      sequence = [];
-      player_sequence = [];
-      game_running = false;
-    }
   } else {
     console.log('check_sequence incomplete');
-    sequence_good = sequence.slice(0, player_sequence.length).reduce(function(prev, curr, i) {
-      return prev && (curr === player_sequence[i]);
+    return challenge_seq.slice(0, input_seq.length).reduce(function(prev, curr, i) {
+      return prev && (curr === input_seq[i]);
     }, true);
-    if (!sequence_good) {
-      flashAll();
-      sequence = [];
-      player_sequence = [];
-      game_running = false;
-    }
   }
 }
 
-var sequence = [];
-var player_sequence = [];
-var game_running = false;
-
-$('#start').click(function() {
-  console.log('start');
-  sequence = [];
-  player_sequence = [];
-  game_running = true;
-  gen_play_sequence();
-});
-
 $('.button').click(function() {
-  if (game_running) {
-    player_sequence.push(COLORS.indexOf($(this).data('color')));
-    check_sequence();
+  if (game_state.waiting_for_input) {
+    lightOn($(this).data('color'));
+    setTimeout(function(color) {
+      lightOff(color);
+    }, 300, $(this).data('color'));
+    game_state.input_seq.push(COLORS.indexOf($(this).data('color')));
   }
 });
