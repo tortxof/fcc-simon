@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 var COLORS = [
   'green',
   'red',
