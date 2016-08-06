@@ -40,7 +40,7 @@ function flashAll() {
   }
 }
 
-function play_seq(seq) {
+function playSeq(seq) {
   console.log('play_seq');
   for (var i=0; i<seq.length; i++) {
     setTimeout(lightOn, (i * 800) + 400 , COLORS[seq[i]]);
@@ -61,6 +61,29 @@ function checkSequence(input_seq, challenge_seq) {
       return prev && (curr === input_seq[i]);
     }, true);
 }
+
+$('#power').click(function() {
+  if (game_state.on) {
+    console.log('power off');
+    game_state.on = false;
+    game_state.waiting_for_input = false;
+  } else {
+    console.log('power on');
+    game_state = new GameState();
+    game_state.on = true;
+    game_state.waiting_for_input = false;
+  }
+});
+
+$('#start').click(function() {
+  if (game_state.on) {
+    game_state.input_seq = [];
+    game_state.challenge_seq = [];
+    genChallengeSeq();
+    playSeq(game_state.challenge_seq);
+    game_state.waiting_for_input = true;
+  }
+});
 
 $('.button').click(function() {
   if (game_state.waiting_for_input) {
