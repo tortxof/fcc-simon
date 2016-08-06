@@ -56,6 +56,11 @@ function playSeq(seq) {
 function genChallengeSeq() {
   console.log('genChallengeSeq');
   game_state.challenge_seq.push(Math.floor(Math.random() * 4));
+  var count_display = game_state.challenge_seq.length.toString();
+  if (count_display.length < 2) {
+    count_display = '0' + count_display;
+  }
+  $('#count').text(count_display);
 }
 
 function checkSequence(input_seq, challenge_seq) {
@@ -70,11 +75,13 @@ function checkSequence(input_seq, challenge_seq) {
 $('#power').click(function() {
   if (game_state.on) {
     console.log('power off');
+    $('#count').text('--');
     game_state.on = false;
     game_state.waiting_for_input = false;
   } else {
     console.log('power on');
     game_state = new GameState();
+    $('#count').text('00');
     game_state.on = true;
     game_state.waiting_for_input = false;
   }
