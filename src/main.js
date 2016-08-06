@@ -104,13 +104,24 @@ $('.button').click(function() {
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
         genChallengeSeq();
-        playSeq(game_state.challenge_seq);
+        var play_seq_time = playSeq(game_state.challenge_seq);
+        setTimeout(function() {
+          game_state.waiting_for_input = true;
+        }, play_seq_time);
+      } else {
+        game_state.waiting_for_input = true;
       }
     } else {
       console.log('sequence bad');
-      flashAll();
+      var anim_time = 0;
+      anim_time += flashAll();
+      setTimeout(function() {
+        anim_time += playSeq(game_state.challenge_seq);
+      }, anim_time);
       game_state.input_seq = [];
+      setTimeout(function() {
+        game_state.waiting_for_input = true;
+      }, anim_time);
     }
-    game_state.waiting_for_input = true;
   }
 });
