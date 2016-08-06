@@ -53,18 +53,13 @@ function genChallengeSeq() {
   game_state.challenge_seq.push(Math.floor(Math.random() * 4));
 }
 
-function check_sequence(input_seq, challenge_seq) {
-  if (input_seq.length >= challenge_seq.length) {
-    console.log('check_sequence complete');
-    return challenge_seq.reduce(function(prev, curr, i) {
+function checkSequence(input_seq, challenge_seq) {
+  console.log('check_sequence');
+  return challenge_seq
+    .slice(0, input_seq.length)
+    .reduce(function(prev, curr, i) {
       return prev && (curr === input_seq[i]);
     }, true);
-  } else {
-    console.log('check_sequence incomplete');
-    return challenge_seq.slice(0, input_seq.length).reduce(function(prev, curr, i) {
-      return prev && (curr === input_seq[i]);
-    }, true);
-  }
 }
 
 $('.button').click(function() {
