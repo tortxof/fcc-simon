@@ -87,10 +87,25 @@ $('#start').click(function() {
 
 $('.button').click(function() {
   if (game_state.waiting_for_input) {
+    game_state.waiting_for_input = false;
     lightOn($(this).data('color'));
     setTimeout(function(color) {
       lightOff(color);
     }, 300, $(this).data('color'));
     game_state.input_seq.push(COLORS.indexOf($(this).data('color')));
+    console.log('game_state.input_seq', game_state.input_seq);
+    if (checkSequence(game_state.input_seq, game_state.challenge_seq)) {
+      console.log('sequence good');
+      if (game_state.input_seq.length >= game_state.challenge_seq.length) {
+        game_state.input_seq = [];
+        genChallengeSeq();
+        playSeq(game_state.challenge_seq);
+      }
+    } else {
+      console.log('sequence bad');
+      flashAll();
+      game_state.input_seq = [];
+    }
+    game_state.waiting_for_input = true;
   }
 });
