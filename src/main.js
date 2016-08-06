@@ -32,20 +32,25 @@ function lightOff(color) {
 
 function flashAll() {
   console.log('flashAll');
-  for (var i=0; i<3; i++) {
+  var num_flashes = 3;
+  for (var i = 0; i < num_flashes; i++) {
     for (var color=0; color<COLORS.length; color++){
       setTimeout(lightOn, (i * 400) + 200, COLORS[color]);
       setTimeout(lightOff, (i * 400) + 400, COLORS[color]);
     }
   }
+  // Return time to finish flashes.
+  return ((num_flashes - 1) * 400) + 400;
 }
 
 function playSeq(seq) {
   console.log('play_seq');
-  for (var i=0; i<seq.length; i++) {
+  for (var i = 0; i < seq.length; i++) {
     setTimeout(lightOn, (i * 800) + 400 , COLORS[seq[i]]);
     setTimeout(lightOff, (i * 800) + 800, COLORS[seq[i]]);
   }
+  // Return time to finish playback.
+  return ((seq.length - 1) * 800) + 800;
 }
 
 function genChallengeSeq() {
