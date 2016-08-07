@@ -14,6 +14,11 @@ var NOTES = {
   blue: 329.628
 };
 
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var gainNode = audioCtx.createGain();
+gainNode.gain.value = 0.5;
+gainNode.connect(audioCtx.destination);
+
 function GameState() {
   // Is the game switched on?
   this.on = false;
@@ -37,27 +42,70 @@ function lightOff(color) {
   $('path.' + color).removeClass(color + '-light');
 }
 
+function playNote(color, start, stop) {
+  var currentTime = audioCtx.currentTime;
+  var oscillator = audioCtx.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.value = NOTES[color];
+  oscillator.connect(gainNode);
+  oscillator.start(currentTime + start);
+  oscillator.stop(currentTime + stop);
+}
+
+function playBuzz(start, stop) {
+  var currentTime = audioCtx.currentTime;
+  var chord = [
+    330,
+    110,
+    55
+  ];
+  var oscillators = chord.map(function(freq) {
+    var oscillator = audioCtx.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = freq;
+    oscillator.connect(gainNode);
+    return oscillator;
+  });
+  oscillators.forEach(function(oscillator) {
+    oscillator.start(currentTime + start);
+    oscillator.stop(currentTime + stop);
+  });
+}
+
 function flashAll() {
   console.log('flashAll');
   var num_flashes = 3;
+  var period = 150;
   for (var i = 0; i < num_flashes; i++) {
+    var start = (i * period) + (period / 2);
+    var stop = (i * period) + period;
+    playBuzz(start / 1000, stop / 1000);
     for (var color=0; color<COLORS.length; color++){
-      setTimeout(lightOn, (i * 400) + 200, COLORS[color]);
-      setTimeout(lightOff, (i * 400) + 400, COLORS[color]);
+      setTimeout(lightOn, start, COLORS[color]);
+      setTimeout(lightOff, stop, COLORS[color]);
     }
   }
   // Return time to finish flashes.
-  return ((num_flashes - 1) * 400) + 400;
+  return ((num_flashes - 1) * period) + period;
 }
 
 function playSeq(seq) {
   console.log('play_seq');
+  var period = -25 * seq.length + 800;
   for (var i = 0; i < seq.length; i++) {
-    setTimeout(lightOn, (i * 800) + 400 , COLORS[seq[i]]);
-    setTimeout(lightOff, (i * 800) + 800, COLORS[seq[i]]);
+    var color = COLORS[seq[i]];
+    var startTime = (i * period) + (period / 2);
+    var stopTime = (i * period) + period;
+    setTimeout(lightOn, startTime, color);
+    setTimeout(lightOff, stopTime, color);
+    playNote(
+      color,
+      startTime / 1000,
+      stopTime / 1000
+    );
   }
   // Return time to finish playback.
-  return ((seq.length - 1) * 800) + 800;
+  return ((seq.length - 1) * period) + period;
 }
 
 function genChallengeSeq() {
@@ -129,6 +177,7 @@ $('.button').click(function() {
     setTimeout(function(color) {
       lightOff(color);
     }, 300, $(this).data('color'));
+    playNote($(this).data('color'), 0, 0.3);
     game_state.input_seq.push(COLORS.indexOf($(this).data('color')));
     console.log('game_state.input_seq', game_state.input_seq);
     if (checkSequence(game_state.input_seq, game_state.challenge_seq)) {
