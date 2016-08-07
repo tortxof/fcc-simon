@@ -122,15 +122,14 @@ $('.button').click(function() {
       }
     } else {
       console.log('sequence bad');
-      var anim_time = 0;
-      anim_time += flashAll();
       setTimeout(function() {
-        anim_time += playSeq(game_state.challenge_seq);
-      }, anim_time);
-      game_state.input_seq = [];
-      setTimeout(function() {
-        game_state.waiting_for_input = true;
-      }, anim_time);
+        setTimeout(function() {
+          setTimeout(function() {
+            game_state.input_seq = [];
+            game_state.waiting_for_input = true;
+          }, playSeq(game_state.challenge_seq));
+        }, flashAll());
+      }, 500);
     }
   }
 });
