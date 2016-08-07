@@ -129,10 +129,11 @@ $('.button').click(function() {
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
         genChallengeSeq();
-        var play_seq_time = playSeq(game_state.challenge_seq);
         setTimeout(function() {
-          game_state.waiting_for_input = true;
-        }, play_seq_time);
+          setTimeout(function() {
+            game_state.waiting_for_input = true;
+          }, playSeq(game_state.challenge_seq));
+        }, 300);
       } else {
         game_state.waiting_for_input = true;
       }
