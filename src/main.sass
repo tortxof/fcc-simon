@@ -53,6 +53,7 @@ body
   font-size: 16px
   background-color: #422
   color: #f22
+  box-shadow: inset 0 0 5px rgba(black, 0.8)
 
 #start
   position: absolute
@@ -69,8 +70,29 @@ body
 #power
   position: absolute
   top: 136px
-  left: 72px
-  background-color: cornflowerblue
+  left: 64px
+  box-sizing: border-box
+  width: 48px
+  height: 24px
+  border-radius: 12px
+  background-color: #666
+  box-shadow: inset 0 0 5px rgba(black, 0.5)
+  &::before
+    content: " "
+    position: absolute
+    top: 0
+    left: 0
+    box-sizing: border-box
+    width: 24px
+    height: 24px
+    border-radius: 50%
+    background-color: white
+    box-shadow: 0 1px 3px black
+
+#power.on
+  background-color: green
+  &::before
+    left: 24px
 
 .buttons
   position: relative
