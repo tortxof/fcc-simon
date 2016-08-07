@@ -72,13 +72,21 @@ function checkSequence(input_seq, challenge_seq) {
     }, true);
 }
 
+function updateStrictIndicator() {
+  if (game_state.strict) {
+    $('#strict-indicator').addClass('on');
+  } else {
+    $('#strict-indicator').removeClass('on');
+  }
+}
+
 $('#power').click(function() {
   if (game_state.on) {
     console.log('power off');
     $(this).removeClass('on');
     $('#count').text('');
-    game_state.on = false;
-    game_state.waiting_for_input = false;
+    game_state = new GameState();
+    updateStrictIndicator();
   } else {
     console.log('power on');
     $(this).addClass('on');
@@ -86,6 +94,7 @@ $('#power').click(function() {
     $('#count').text('--');
     game_state.on = true;
     game_state.waiting_for_input = false;
+    updateStrictIndicator();
   }
 });
 
@@ -97,6 +106,13 @@ $('#start').click(function() {
     playSeq(game_state.challenge_seq);
     game_state.waiting_for_input = true;
   }
+});
+
+$('#strict').click(function() {
+  if (game_state.on) {
+    game_state.strict = !game_state.strict;
+  }
+  updateStrictIndicator();
 });
 
 $('.button').click(function() {

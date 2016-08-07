@@ -28,10 +28,11 @@ body
   border-radius: 50%
   background-color: #ddd
   button
+    box-sizing: border-box
     width: 32px
     height: 32px
     border-radius: 50%
-    border: 5px solid #888
+    border: 3px solid #888
 
 .game-label
   position: absolute
@@ -43,7 +44,7 @@ body
 
 #count
   position: absolute
-  top: 88px
+  top: 96px
   left: 32px
   width: 2ch
   height: 1em
@@ -58,14 +59,37 @@ body
 #start
   position: absolute
   top: 96px
-  left: 72px
+  left: 100px
   background-color: red
+
+#start-label
+  position: absolute
+  top: 128px
+  left: 96px
 
 #strict
   position: absolute
   top: 96px
-  left: 108px
+  left: 152px
   background-color: yellow
+
+#strict-label
+  position: absolute
+  top: 128px
+  left: 160px
+
+#strict-indicator
+  position: absolute
+  top: 104px
+  left: 192px
+  width: 16px
+  height: 16px
+  border-radius: 50%
+  background-color: #422
+
+#strict-indicator.on
+  background-color: #f22
+  box-shadow: 0 0 3px rgba(red, 0.8)
 
 #power
   position: absolute
