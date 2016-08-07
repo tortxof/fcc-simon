@@ -75,13 +75,13 @@ function checkSequence(input_seq, challenge_seq) {
 $('#power').click(function() {
   if (game_state.on) {
     console.log('power off');
-    $('#count').text('--');
+    $('#count').text('');
     game_state.on = false;
     game_state.waiting_for_input = false;
   } else {
     console.log('power on');
     game_state = new GameState();
-    $('#count').text('00');
+    $('#count').text('--');
     game_state.on = true;
     game_state.waiting_for_input = false;
   }
