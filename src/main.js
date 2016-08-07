@@ -210,15 +210,15 @@ $('.button').click(function() {
         game_state.input_seq = [];
         if (game_state.challenge_seq.length === 3) {
           console.log('win');
-          game_state.challenge_seq = [];
-          genChallengeSeq();
           setTimeout(function() {
             setTimeout(function() {
+              game_state.challenge_seq = [];
+              genChallengeSeq();
               setTimeout(function() {
                 game_state.waiting_for_input = true;
               }, playSeq(game_state.challenge_seq));
             }, playWin());
-          }, 300);
+          }, 500);
         } else {
           genChallengeSeq();
           setTimeout(function() {
