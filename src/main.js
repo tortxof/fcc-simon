@@ -208,7 +208,7 @@ $('.button').click(function() {
       console.log('sequence good');
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
-        if (game_state.challenge_seq.length === 3) {
+        if (game_state.challenge_seq.length === 20) {
           console.log('win');
           setTimeout(function() {
             setTimeout(function() {
