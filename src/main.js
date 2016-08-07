@@ -52,9 +52,9 @@ function playNote(color, start, stop) {
   oscillator.stop(currentTime + stop);
 }
 
-function playBuzz(start, stop) {
+function playChord(start, stop, chord) {
   var currentTime = audioCtx.currentTime;
-  var chord = [
+  chord = chord || [
     330,
     110,
     55
@@ -79,7 +79,7 @@ function flashAll() {
   for (var i = 0; i < num_flashes; i++) {
     var start = (i * period) + (period / 2);
     var stop = (i * period) + period;
-    playBuzz(start / 1000, stop / 1000);
+    playChord(start / 1000, stop / 1000);
     for (var color=0; color<COLORS.length; color++){
       setTimeout(lightOn, start, COLORS[color]);
       setTimeout(lightOff, stop, COLORS[color]);
@@ -87,6 +87,30 @@ function flashAll() {
   }
   // Return time to finish flashes.
   return ((num_flashes - 1) * period) + period;
+}
+
+function playWin() {
+  console.log('playWin');
+  var period = 150;
+  COLORS.forEach(function(color, i) {
+    var startTime = i * period;
+    var stopTime = i * period + Math.floor(period * 0.8);
+    setTimeout(lightOn, startTime, color);
+    setTimeout(lightOff, stopTime, color);
+    playNote(color, startTime / 1000, stopTime / 1000);
+  });
+  var startTime = period * (COLORS.length + 1);
+  var stopTime = startTime + (period / 2);
+  COLORS.forEach(function(color) {
+    setTimeout(lightOn, startTime, color);
+    setTimeout(lightOff, stopTime, color);
+    setTimeout(lightOn, startTime + period, color);
+    setTimeout(lightOff, stopTime + period, color);
+  });
+  var chord = [220, 277.183];
+  playChord(startTime / 1000, stopTime / 1000, chord);
+  playChord((startTime + period) / 1000, (stopTime + period) / 1000, chord);
+  return period * 7;
 }
 
 function playSeq(seq) {
@@ -184,12 +208,25 @@ $('.button').click(function() {
       console.log('sequence good');
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
-        genChallengeSeq();
-        setTimeout(function() {
+        if (game_state.challenge_seq.length === 3) {
+          console.log('win');
+          game_state.challenge_seq = [];
+          genChallengeSeq();
           setTimeout(function() {
-            game_state.waiting_for_input = true;
-          }, playSeq(game_state.challenge_seq));
-        }, 300);
+            setTimeout(function() {
+              setTimeout(function() {
+                game_state.waiting_for_input = true;
+              }, playSeq(game_state.challenge_seq));
+            }, playWin());
+          }, 300);
+        } else {
+          genChallengeSeq();
+          setTimeout(function() {
+            setTimeout(function() {
+              game_state.waiting_for_input = true;
+            }, playSeq(game_state.challenge_seq));
+          }, 300);
+        }
       } else {
         game_state.waiting_for_input = true;
       }
