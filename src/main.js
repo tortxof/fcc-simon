@@ -140,10 +140,19 @@ $('.button').click(function() {
       console.log('sequence bad');
       setTimeout(function() {
         setTimeout(function() {
-          setTimeout(function() {
+          if (game_state.strict) {
             game_state.input_seq = [];
-            game_state.waiting_for_input = true;
-          }, playSeq(game_state.challenge_seq));
+            game_state.challenge_seq = [];
+            genChallengeSeq();
+            setTimeout(function() {
+              game_state.waiting_for_input = true;
+            }, playSeq(game_state.challenge_seq));
+          } else {
+            setTimeout(function() {
+              game_state.input_seq = [];
+              game_state.waiting_for_input = true;
+            }, playSeq(game_state.challenge_seq));
+          }
         }, flashAll());
       }, 500);
     }
