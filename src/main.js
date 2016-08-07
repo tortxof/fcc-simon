@@ -7,6 +7,13 @@ var COLORS = [
   'blue'
 ];
 
+var NOTES = {
+  green: 164.814,
+  yellow: 277.183,
+  red: 220,
+  blue: 329.628
+};
+
 function GameState() {
   // Is the game switched on?
   this.on = false;
