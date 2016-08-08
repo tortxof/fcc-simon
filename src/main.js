@@ -244,7 +244,7 @@ $('.button').click(function() {
             setTimeout(function() {
               game_state.waiting_for_input = true;
             }, playSeq(game_state.challenge_seq));
-          }, 300);
+          }, 500);
         }
       } else {
         game_state.waiting_for_input = true;
