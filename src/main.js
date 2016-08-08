@@ -117,7 +117,7 @@ function playWin() {
 
 function playSeq(seq) {
   console.log('play_seq');
-  var period = -25 * seq.length + 800;
+  var period = Math.max(150, -25 * seq.length + 800);
   for (var i = 0; i < seq.length; i++) {
     var color = COLORS[seq[i]];
     var startTime = (i * period) + (period / 2);
