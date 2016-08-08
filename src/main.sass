@@ -1,14 +1,19 @@
-$green: hsl(120, 50%, 20%)
-$red: hsl(0, 50%, 20%)
-$yellow: hsl(60, 50%, 20%)
-$blue: hsl(240, 50%, 20%)
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700)
+
+$green: hsl(120, 70%, 20%)
+$red: hsl(0, 70%, 25%)
+$yellow: hsl(60, 80%, 25%)
+$blue: hsl(240, 60%, 30%)
 
 body
   margin: 0
+  font-family: 'Roboto Slab', serif
+  font-weight: 400
   color: #333
   background-color: #444
 
 .simon
+  user-select: none
   position: relative
   margin: 64px auto
   width: 512px
@@ -38,14 +43,15 @@ body
   position: absolute
   top: 32px
   left: 116px
-  font-size: 32px
-  font-weight: bold
+  font-size: 40px
+  font-weight: 700
   transform: translateX(-50%)
 
 #count
   position: absolute
-  top: 96px
-  left: 32px
+  top: 116px
+  left: 48px
+  transform: translate(-50%, -50%)
   width: 2ch
   height: 1em
   padding: 8px
@@ -58,32 +64,37 @@ body
 
 #start
   position: absolute
-  top: 96px
-  left: 100px
+  top: 116px
+  left: 116px
+  transform: translate(-50%, -50%)
   background-color: red
 
 #start-label
   position: absolute
-  top: 128px
-  left: 96px
+  top: 132px
+  left: 116px
+  transform: translateX(-50%)
 
 #strict
   position: absolute
-  top: 96px
-  left: 152px
+  top: 116px
+  left: 184px
+  transform: translate(-50%, -50%)
   background-color: yellow
 
 #strict-label
   position: absolute
-  top: 128px
-  left: 160px
+  top: 132px
+  left: 184px
+  transform: translateX(-50%)
 
 #strict-indicator
   position: absolute
-  top: 104px
-  left: 192px
-  width: 16px
-  height: 16px
+  top: 85px
+  left: 184px
+  width: 8px
+  height: 8px
+  transform: translateX(-50%)
   border-radius: 50%
   background-color: #422
 
