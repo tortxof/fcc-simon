@@ -47,10 +47,14 @@ body
   font-weight: 700
   transform: translateX(-50%)
 
+.label
+  font-size: 12px
+  font-weight: 700
+
 #count
   position: absolute
   top: 116px
-  left: 48px
+  left: 46px
   transform: translate(-50%, -50%)
   width: 2ch
   height: 1em
@@ -65,33 +69,33 @@ body
 #start
   position: absolute
   top: 116px
-  left: 116px
+  left: 93px
   transform: translate(-50%, -50%)
-  background-color: red
+  background-color: #d44
 
 #start-label
   position: absolute
   top: 132px
-  left: 116px
+  left: 93px
   transform: translateX(-50%)
 
 #strict
   position: absolute
   top: 116px
-  left: 184px
+  left: 139px
   transform: translate(-50%, -50%)
-  background-color: yellow
+  background-color: #dd4
 
 #strict-label
   position: absolute
   top: 132px
-  left: 184px
+  left: 139px
   transform: translateX(-50%)
 
 #strict-indicator
   position: absolute
   top: 85px
-  left: 184px
+  left: 139px
   width: 8px
   height: 8px
   transform: translateX(-50%)
@@ -101,6 +105,33 @@ body
 #strict-indicator.on
   background-color: #f22
   box-shadow: 0 0 3px rgba(red, 0.8)
+
+#endless
+  position: absolute
+  top: 116px
+  left: 186px
+  transform: translate(-50%, -50%)
+  background-color: hsl(240, 50%, 80%)
+
+#endless-label
+  position: absolute
+  top: 132px
+  left: 186px
+  transform: translateX(-50%)
+
+#endless-indicator
+  position: absolute
+  top: 85px
+  left: 186px
+  width: 8px
+  height: 8px
+  transform: translateX(-50%)
+  border-radius: 50%
+  background-color: #224
+
+#endless-indicator.on
+  background-color: #66f
+  box-shadow: 0 0 5px #66f
 
 #power
   position: absolute
@@ -128,6 +159,18 @@ body
   background-color: green
   &::before
     left: 24px
+
+#power-off
+  position: absolute
+  top: 192px
+  right: 148px
+  transform: translateY(-50%)
+
+#power-on
+  position: absolute
+  top: 192px
+  left: 148px
+  transform: translateY(-50%)
 
 .buttons
   position: relative
