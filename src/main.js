@@ -14,8 +14,12 @@ var NOTES = {
 
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var gainNode = audioCtx.createGain();
+var filterNode = audioCtx.createBiquadFilter();
+filterNode.type = 'lowpass';
+filterNode.frequency.value = 660;
 gainNode.gain.value = 0.5;
-gainNode.connect(audioCtx.destination);
+gainNode.connect(filterNode);
+filterNode.connect(audioCtx.destination);
 
 function GameState() {
   // Is the game switched on?
