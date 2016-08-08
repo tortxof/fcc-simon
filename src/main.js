@@ -1,5 +1,3 @@
-/* eslint no-console: "off" */
-
 var COLORS = [
   'green',
   'red',
@@ -75,7 +73,6 @@ function playChord(start, stop, chord) {
 }
 
 function flashAll() {
-  console.log('flashAll');
   var num_flashes = 3;
   var period = 150;
   for (var i = 0; i < num_flashes; i++) {
@@ -92,7 +89,6 @@ function flashAll() {
 }
 
 function playWin() {
-  console.log('playWin');
   var period = 150;
   COLORS.forEach(function(color, i) {
     var startTime = i * period;
@@ -116,7 +112,6 @@ function playWin() {
 }
 
 function playSeq(seq) {
-  console.log('play_seq');
   var period = Math.max(150, -25 * seq.length + 800);
   for (var i = 0; i < seq.length; i++) {
     var color = COLORS[seq[i]];
@@ -135,7 +130,6 @@ function playSeq(seq) {
 }
 
 function genChallengeSeq() {
-  console.log('genChallengeSeq');
   game_state.challenge_seq.push(Math.floor(Math.random() * 4));
   var count_display = game_state.challenge_seq.length.toString();
   if (count_display.length < 2) {
@@ -145,7 +139,6 @@ function genChallengeSeq() {
 }
 
 function checkSequence(input_seq, challenge_seq) {
-  console.log('check_sequence');
   return challenge_seq
     .slice(0, input_seq.length)
     .reduce(function(prev, curr, i) {
@@ -171,14 +164,12 @@ function updateEndlessIndicator() {
 
 $('#power').click(function() {
   if (game_state.on) {
-    console.log('power off');
     $(this).removeClass('on');
     $('#count').text('');
     game_state = new GameState();
     updateStrictIndicator();
     updateEndlessIndicator();
   } else {
-    console.log('power on');
     $(this).addClass('on');
     game_state = new GameState();
     $('#count').text('--');
@@ -222,13 +213,10 @@ $('.button').click(function() {
     }, 300, $(this).data('color'));
     playNote($(this).data('color'), 0, 0.3);
     game_state.input_seq.push(COLORS.indexOf($(this).data('color')));
-    console.log('game_state.input_seq', game_state.input_seq);
     if (checkSequence(game_state.input_seq, game_state.challenge_seq)) {
-      console.log('sequence good');
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
         if (game_state.challenge_seq.length >= 20 && !game_state.endless) {
-          console.log('win');
           setTimeout(function() {
             setTimeout(function() {
               game_state.challenge_seq = [];
@@ -250,7 +238,6 @@ $('.button').click(function() {
         game_state.waiting_for_input = true;
       }
     } else {
-      console.log('sequence bad');
       setTimeout(function() {
         setTimeout(function() {
           if (game_state.strict) {
