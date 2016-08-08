@@ -24,6 +24,8 @@ function GameState() {
   this.on = false;
   // Is strict mode enabled?
   this.strict = false;
+  // Is endless mode enabled?
+  this.endless = false;
   // Are we waiting for player input?
   this.waiting_for_input = false;
   // Computer generated sequence. One element is added each turn.
@@ -159,6 +161,14 @@ function updateStrictIndicator() {
   }
 }
 
+function updateEndlessIndicator() {
+  if (game_state.endless) {
+    $('#endless-indicator').addClass('on');
+  } else {
+    $('#endless-indicator').removeClass('on');
+  }
+}
+
 $('#power').click(function() {
   if (game_state.on) {
     console.log('power off');
@@ -166,6 +176,7 @@ $('#power').click(function() {
     $('#count').text('');
     game_state = new GameState();
     updateStrictIndicator();
+    updateEndlessIndicator();
   } else {
     console.log('power on');
     $(this).addClass('on');
@@ -174,6 +185,7 @@ $('#power').click(function() {
     game_state.on = true;
     game_state.waiting_for_input = false;
     updateStrictIndicator();
+    updateEndlessIndicator();
   }
 });
 
@@ -194,6 +206,13 @@ $('#strict').click(function() {
   updateStrictIndicator();
 });
 
+$('#endless').click(function() {
+  if (game_state.on) {
+    game_state.endless = !game_state.endless;
+  }
+  updateEndlessIndicator();
+});
+
 $('.button').click(function() {
   if (game_state.waiting_for_input) {
     game_state.waiting_for_input = false;
@@ -208,7 +227,7 @@ $('.button').click(function() {
       console.log('sequence good');
       if (game_state.input_seq.length >= game_state.challenge_seq.length) {
         game_state.input_seq = [];
-        if (game_state.challenge_seq.length === 20) {
+        if (game_state.challenge_seq.length >= 20 && !game_state.endless) {
           console.log('win');
           setTimeout(function() {
             setTimeout(function() {
