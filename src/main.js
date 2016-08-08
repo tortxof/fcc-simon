@@ -177,8 +177,9 @@ $('#power').click(function() {
     $(this).addClass('on');
     game_state = new GameState();
     $('#count').text('--');
-    game_state.on = true;
-    game_state.waiting_for_input = false;
+    setTimeout(function() {
+      game_state.on = true;
+    }, playWin());
     updateStrictIndicator();
     updateEndlessIndicator();
   }
