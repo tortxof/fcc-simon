@@ -204,7 +204,7 @@ $('#endless').click(function() {
   updateEndlessIndicator();
 });
 
-$('.button').click(function() {
+$('.game-button').click(function() {
   if (game_state.waiting_for_input) {
     game_state.waiting_for_input = false;
     lightOn($(this).data('color'));
